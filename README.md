@@ -1,45 +1,48 @@
- # Balanceador de carga con haproxy y Datadog
+# Balanceador de carga con haproxy y Datadog
 ![balanceador](balanceador.png)
 
 ## Descripción.
-Este proyecto muestra cómo configurar un balanceador de cargas con HAProxy y tres máquinas de Ubuntu para mejorar la disponibilidad y escalabilidad de una aplicación web. Además, se utiliza Datadog para monitorear el rendimiento de una de las maquinas en este caso haproxy.
+Este proyecto proporciona una guía detallada sobre la configuración de un balanceador de cargas utilizando HAProxy junto con tres máquinas CentOS. Además, se integra Datadog como una interfaz de monitoreo para evaluar el rendimiento de una de las máquinas, en particular, el servidor HAProxy.
 
 ## Requisitos previos
 Antes de comenzar con la configuración del balanceador de cargas, se deben cumplir los siguientes requisitos:
 
-1. Tener tres máquinas virtuales de Ubuntu instaladas y configuradas en la misma red.
-2. Tener privilegios de superusuario en las tres máquinas.
+1. Tener tres máquinas virtuales de Centos instaladas y configuradas en la misma red.
+2. Tener privilegios de superusuario en las tres máquinas, que para eso se usa el comando "sudo -i".
 3. Tener instalado HAProxy en la máquina que actuará como balanceador de cargas.  
 ## Creacion del archivo Vagrantfile
 Se debe ejecutar el comando `Vagrant init` para crear el archivo y se configura asi en cualqier editor de texto.
 
-## Vagrantfile
- encoding: UTF-8
- -- mode: ruby --
- vi: set ft=ruby :
-
 Vagrant.configure("2") do |config|
-
-  config.vm.define :haproxy do |haproxy|  
-   haproxy.vm.box = "bento/ubuntu-20.04"  
-   haproxy.vm.network :private_network, ip: "192.168.100.5"  
-   haproxy.vm.hostname = "haproxy"  
-   end
-
-config.vm.define :backend1 do |backend1|  
-backend1.vm.box = "bento/ubuntu-20.04"  
- backend1.vm.network :private_network, ip: "192.168.100.6"  
- backend1.vm.hostname = "backend1"  
- end  
+	if Vagrant.has_plugin? "vagrant-vbguest"
+		config.vbguest.no_install = true
+		config.vbguest.auto_update = false
+		config.vbguest.no_remote = true
+	end
+	config.vm.define :cliente do |cliente|
+		cliente.vm.box = "generic/centos9s"
+		cliente.vm.network :private_network, ip: "192.168.50.2"
+		cliente.vm.network :forwarded_port, guest: 80, host:5567
+		cliente.vm.network :forwarded_port, guest: 443, host:5568
+		cliente.vm.hostname = "cliente"
+		cliente.vm.synced_folder "C:/Users/JR/prueba", "/home/vagrant/teleco"
+	end
+	config.vm.define :servidor do |servidor|
+		servidor.vm.box = "generic/centos9s"
+		servidor.vm.network :private_network, ip: "172.16.0.3"
+		servidor.vm.network :private_network, ip: "192.168.50.3"
+		servidor.vm.hostname = "servidor"
+		servidor.vm.synced_folder "C:/Users/JR/prueba", "/home/vagrant/teleco"
+	end
+	config.vm.define :cliente2 do |cliente2|
+		cliente2.vm.box = "generic/centos9s"
+		cliente2.vm.network :private_network, ip: "192.168.50.4"
+		cliente2.vm.hostname = "cliente2"
+		cliente2.vm.synced_folder "C:/Users/JR/prueba", "/home/vagrant/teleco"
+	end
+end
  
- 
- config.vm.define :backend2 do |backend2|  
- backend2.vm.box = "bento/ubuntu-20.04"  
- backend2.vm.network :private_network, ip: "192.168.100.7"  
- backend2.vm.hostname = "backend2"  
- end  
- end  
- Una vez configurado el Vagranfile se debe ejecutar el comando `vagrant up` para la creacion de las tres maquinas.
+Una vez configurado el Vagranfile se debe ejecutar el comando `vagrant up` para la creacion de las tres maquinas.
 
 
 
@@ -72,9 +75,10 @@ Se debe instalar el servicio de apache2 con el siguiente comando: `apt install a
 
 # Configuración del balanceador de cargas
 
-1. Instalar HAProxy en la máquina que actuará como balanceador de cargas en este caso es la maquina con el nombre de haproxy.
-2. Crear un archivo de configuración para HAProxy en `/etc/haproxy/haproxy.cfg`.
-3. Configurar el archivo de configuración de HAProxy de la siguiente manera:
+1. Instalar los compiladores en la máquina servidor que servira.
+2. Instalar HAProxy en la máquina que actuará como balanceador de cargas en este caso es la maquina con el nombre de servidor.
+3. Crear un archivo de configuración para HAProxy en `/etc/haproxy/haproxy.cfg`.
+4. Configurar el archivo de configuración de HAProxy de la siguiente manera:
 
 ![haproxy.cfg](haproxy.cfg.jpg)
 4. Reiniciar HAProxy para aplicar los cambios.
