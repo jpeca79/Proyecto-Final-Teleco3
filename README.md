@@ -163,23 +163,25 @@ Para usar el balanceador de cargas con HAProxy y tres máquinas de Centos9, sigu
 # Configuración de Datadog
 
 1. Crear la cuenta en datadog dando click en prueba gratuita.
-![datadog-cuenta](datadog-cuenta.jpg)
+![Registro-dayadog](Registro.png)
+![datadog-cuenta](Cuenta.png)
 
-2. luego llenas tus datos personales.
-3. Te pidiran que instales el agente de datadog asi:
-![agente.datadog](agente.datadog.jpg)
+3. luego llenas tus datos personales.
+4. Te pidiran que instales el agente de datadog asi:
+![agente.datadog](Servidor.png)
 lo cual utilizas tu API KEY y utilizas el comando en la maquina en la que deseas instalar el agente datadog.
-4. Una vez configurado el agente de datadog en la maquina damos click en infraestructura y despues en  mapa de anfitrion nos debe dejar observar el host asi:
-![mapainfraestructura](mapainfraestrucrura.jpg)
-5. luego vamos al apartado de dashboards y damos click en new dashboard y creamos.
-![creacion.dashboard](creacion.dashboard.jpg)
-6. Una vez creado el dashboard damos click en add widgets or Powerpacks.
-![agregarmetricas](agregarmetricas.jpg)
-7. Nos mostrara la siguiente ventana donde podemos escoger el tipo de grafico deseado.
-![graficos](graficos.jpg)
-8. Una vez se escoja el grafico se procede a configurar las metricas que se quieren visualizar y se dan click en save.
-![configuracion](configuracion.jpg)
-9. luego podemos observar el grafico ya creado en nuestro dashboard.
+5. Una vez configurado el agente de datadog en la maquina damos click en infraestructura y despues en  mapa de anfitrion nos debe dejar observar el host asi:
+![mapainfraestructura](Apikey.jpg)
+![Llave de key](select.jpg)
+6. luego vamos al apartado de dashboards y damos click en new dashboard y creamos.
+![creacion.dashboard](dashboard.jpg)
+7. Una vez creado el dashboard damos click en add widgets or Powerpacks.
+![agregarmetricas](graficos.jpg)
+8. Nos mostrara la siguiente ventana donde podemos escoger el tipo de grafico deseado.
+![graficos](intalaciones.jpg)
+9. Una vez se escoja el grafico se procede a configurar las metricas que se quieren visualizar y se dan click en save.
+![configuracion](type.jpg)
+10. luego podemos observar el grafico ya creado en nuestro dashboard.
 ![grafico1](grafico1.jpg)  
 Y asi podemos seguir creando los graficos deseados para nuestro dashboard.
 # Contacto
