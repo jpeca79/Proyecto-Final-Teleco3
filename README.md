@@ -13,34 +13,34 @@ Antes de comenzar con la configuración del balanceador de cargas, se deben cump
 ## Creacion del archivo Vagrantfile
 Se debe ejecutar el comando `Vagrant init` para crear el archivo y se configura asi en cualqier editor de texto.
 
-Vagrant.configure("2") do |config|
-	if Vagrant.has_plugin? "vagrant-vbguest"
+	Vagrant.configure("2") do |config|
+	  if Vagrant.has_plugin? "vagrant-vbguest"
 		config.vbguest.no_install = true
 		config.vbguest.auto_update = false
 		config.vbguest.no_remote = true
-	end
-	config.vm.define :cliente do |cliente|
+	  end
+	  config.vm.define :cliente do |cliente|
 		cliente.vm.box = "generic/centos9s"
 		cliente.vm.network :private_network, ip: "192.168.50.2"
 		cliente.vm.network :forwarded_port, guest: 80, host:5567
 		cliente.vm.network :forwarded_port, guest: 443, host:5568
 		cliente.vm.hostname = "cliente"
 		cliente.vm.synced_folder "C:/Users/JR/prueba", "/home/vagrant/teleco"
-	end
-	config.vm.define :servidor do |servidor|
+	  end
+	  config.vm.define :servidor do |servidor|
 		servidor.vm.box = "generic/centos9s"
 		servidor.vm.network :private_network, ip: "172.16.0.3"
 		servidor.vm.network :private_network, ip: "192.168.50.3"
 		servidor.vm.hostname = "servidor"
 		servidor.vm.synced_folder "C:/Users/JR/prueba", "/home/vagrant/teleco"
-	end
-	config.vm.define :cliente2 do |cliente2|
+	  end
+	  config.vm.define :cliente2 do |cliente2|
 		cliente2.vm.box = "generic/centos9s"
 		cliente2.vm.network :private_network, ip: "192.168.50.4"
 		cliente2.vm.hostname = "cliente2"
 		cliente2.vm.synced_folder "C:/Users/JR/prueba", "/home/vagrant/teleco"
+	  end
 	end
-end
  
 Una vez que hayas configurado el archivo Vagrantfile, procede ejecutando el comando vagrant up para crear las tres máquinas virtuales. Además, es importante verificar que SELinux esté desactivado. Puedes hacerlo ejecutando el comando 'sestatus'. Si SELinux está habilitado, deberás seguir estos pasos para desactivarlo:
 
@@ -62,7 +62,17 @@ Con respecto al firewall (firewalld), puedes verificar su estado ejecutando serv
 * IP: 192.168.50.3
 * Sistema operativo: Centos 9
 * Servidor  instalado: haproxy y datadog-agent  
-Se debe instalar primero los compiladores con este comando: 'yum install gc pcre-devel tar make -y', luego se instala el haproxy con este comando: 'wget https://www.haproxy.org/download/2.8/src/haproxy-2.8.3.tar.gz', luego de esto se descomprime con este comando: 'make TARGET =linux-glibc. POr ultimo se instala el haproxy con este comando: 'make install' para ya al final se inicia el servicio con  el comando: `sudo systemctl start haproxy`.  
+
+-Para configurar HAProxy en tu sistema, sigue estos pasos:
+
+*Instala los compiladores y dependencias necesarias utilizando el siguiente comando: 'yum install gcc pcre-devel tar make -y'.
+*Descarga el paquete de HAProxy utilizando wget. Puedes hacerlo con el siguiente comando: 'wget https://www.haproxy.org/download/2.8/src/haproxy-2.8.3.tar.gz'.
+*Descomprime el archivo descargado usando el siguiente comando: 'tar -xzf haproxy-2.8.3.tar.gz'.
+*Ingresa al directorio descomprimido de HAProxy: 'cd haproxy-2.8.3'.
+*Compila HAProxy para tu sistema. Asegúrate de usar el comando correcto: 'make TARGET=linux-glibc'.
+*Instala HAProxy en tu sistema: 'make install'.
+*Finalmente, inicia el servicio de HAProxy: 'sudo systemctl start haproxy'.
+Con estos pasos, habrás instalado y configurado HAProxy en tu sistema CentOS. Asegúrate de haber ejecutado los comandos con permisos de superusuario o con el uso del comando sudo cuando sea necesario.
 
 2. Configuración de la segunda máquina virtual
 * Nombre de la maquina: backend1
