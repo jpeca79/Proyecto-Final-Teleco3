@@ -42,7 +42,15 @@ Vagrant.configure("2") do |config|
 	end
 end
  
-Una vez configurado el Vagranfile se debe ejecutar el comando `vagrant up` para la creacion de las tres maquinas.
+Una vez que hayas configurado el archivo Vagrantfile, procede ejecutando el comando vagrant up para crear las tres máquinas virtuales. Además, es importante verificar que SELinux esté desactivado. Puedes hacerlo ejecutando el comando 'sestatus'. Si SELinux está habilitado, deberás seguir estos pasos para desactivarlo:
+
+1.Abre un editor de texto como 'vim' o 'nano' y accede al archivo /etc/selinux/config.
+
+2.Dentro de este archivo, busca la línea que contiene 'SELINUX=enabled' si SELinux está habilitado.
+
+3.Para desactivarlo, simplemente cambia 'enabled' por 'disabled', de la siguiente manera: 'SELINUX=disabled'.
+
+Con respecto al firewall (firewalld), puedes verificar su estado ejecutando service firewalld status. Si muestra que está activo, puedes desactivarlo ejecutando el siguiente comando: 'systemctl stop firewalld'.
 
 
 
@@ -50,25 +58,24 @@ Una vez configurado el Vagranfile se debe ejecutar el comando `vagrant up` para 
 ## Configuración de las máquinas virtuales.
 1. Configuración de la primera máquina virtual
 
-* Nombre de la maquina: haproxy
-* IP: 192.168.100.5
-* Sistema operativo: Ubuntu
+* Nombre de la maquina: servidor 
+* IP: 192.168.50.3
+* Sistema operativo: Centos 9
 * Servidor  instalado: haproxy y datadog-agent  
-Se debe instalar el servicio de haproxy ejecutando el siguiente comando: `apt install haproxy`, y se inicia el servicio con  el comando: `sudo systemctl start haproxy`.  
-tambien instalamos el agente de datadog con el comando ofrecido para la instalacion del agente en el cual se incluye la API KEY de la cuenta creada el cual nos enviara datos de las metricas monitoriadas en la interfaz grafica del dashboard realizado en datadog
+Se debe instalar primero los compiladores con este comando: 'yum install gc pcre-devel tar make -y', luego se instala el haproxy con este comando: 'wget https://www.haproxy.org/download/2.8/src/haproxy-2.8.3.tar.gz', luego de esto se descomprime con este comando: 'make TARGET =linux-glibc. POr ultimo se instala el haproxy con este comando: 'make install' para ya al final se inicia el servicio con  el comando: `sudo systemctl start haproxy`.  
 
 2. Configuración de la segunda máquina virtual
 * Nombre de la maquina: backend1
-* IP: 192.168.100.6
-* Sistema operativo: Ubuntu
+* IP: 192.168.50.4
+* Sistema operativo: Centos 9
 * Servidor web instalado: Apache  
 Se debe instalar el servicio de apache2 con el siguiente comando: `apt install apache2`, una vez instalado se debe crear un archivo index.html el cual se crea en la ruta `var/www/html` y por ultimo se Ejecuta el siguiente comando para iniciar el servicio de Apache: `sudo systemctl start apache2`.
  
 
 3. Configuración de la tercera máquina virtual
 * Nombre de la maquina: backend2
-* IP: 192.168.100.7
-* Sistema operativo: Ubuntu
+* IP: 192.168.50.4
+* Sistema operativo: Centos 9
 * Servidor web instalado: Apache  
 Se debe instalar el servicio de apache2 con el siguiente comando: `apt install apache2` una vez instalado se debe crear un archivo index.html el cual se crea en la ruta `var/www/html` y por ultimo se Ejecuta el siguiente comando para iniciar el servicio de Apache: `sudo service apache2 start`.
 
@@ -77,18 +84,27 @@ Se debe instalar el servicio de apache2 con el siguiente comando: `apt install a
 
 1. Instalar los compiladores en la máquina servidor que servira.
 2. Instalar HAProxy en la máquina que actuará como balanceador de cargas en este caso es la maquina con el nombre de servidor.
-3. Crear un archivo de configuración para HAProxy en `/etc/haproxy/haproxy.cfg`.
-4. Configurar el archivo de configuración de HAProxy de la siguiente manera:
+3.para que funcione el haproxy se debe crear ciertos directorios los cuales son los siguiente:
+-'mkdir -p /etc/haproxy'
+-'mkdir -p /var/lib/haproxy'
+-'touch /var/lib/haproxy/stats'
+-'ln-s /usr/local/sbin/haproxy/usr/sbin/haproxy'
+-'cp ~/haproxy-2.8.3/examples/haproxy.init/etc/init.d/haproxy'
+-'chmod 755 /etc/init.d/haproxy'
+-systemctl daemon-reload'
+-'chkconfig haproxy on'
+4. Crear un archivo de configuración para HAProxy en `/etc/haproxy/haproxy.cfg`.
+5. Configurar el archivo de configuración de HAProxy de la siguiente manera:
 
 ![haproxy.cfg](haproxy.cfg.jpg)
-4. Reiniciar HAProxy para aplicar los cambios.
+4. Reiniciar HAProxy para aplicar los cambios, para esto se utiliza este codigo 'service haproxy restart'.
 
 # Uso
-Para usar el balanceador de cargas con HAProxy y tres máquinas de Ubuntu, sigue los siguientes pasos:
+Para usar el balanceador de cargas con HAProxy y tres máquinas de Centos9, sigue los siguientes pasos:
 
-1. Accede al balanceador de cargas a través de su dirección IP en este caso es la maquina con el nombre de haproxy.
+1. Accede al balanceador de cargas a través de su dirección IP en este caso es la maquina con el nombre de servidor "192.168.50.3".
 2. La solicitud será dirigida a uno de los dos servidores web de manera aleatoria asi:
-![backend1](backend1.jpg)
+
 ![backend2](backend2.jpg)
 
 
