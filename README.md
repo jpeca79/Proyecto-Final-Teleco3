@@ -83,7 +83,7 @@ Con estos pasos, habrás instalado y configurado HAProxy en tu sistema CentOS. A
 
 2. Configuración de la segunda máquina virtual
 * Nombre de la maquina: backend1
-* IP: 192.168.50.4
+* IP: 192.168.50.2
 * Sistema operativo: Centos 9
 * Servidor web instalado: Apache  
 Se debe instalar el servicio de apache2 con el siguiente comando: `apt install apache2`, una vez instalado se debe crear un archivo index.html el cual se crea en la ruta `var/www/html` y por ultimo se Ejecuta el siguiente comando para iniciar el servicio de Apache: `sudo systemctl start apache2`.
@@ -157,7 +157,8 @@ Para usar el balanceador de cargas con HAProxy y tres máquinas de Centos9, sigu
 1. Accede al balanceador de cargas a través de su dirección IP en este caso es la maquina con el nombre de servidor "192.168.50.3".
 2. La solicitud será dirigida a uno de los dos servidores web de manera aleatoria asi:
 
-![backend2](cliente 2.jpg)
+![backend1](cliente1.jpg)
+![backend2](cliente2.jpg)
 
 
 
@@ -165,24 +166,24 @@ Para usar el balanceador de cargas con HAProxy y tres máquinas de Centos9, sigu
 
 1. Crear la cuenta en datadog dando click en prueba gratuita.
 ![Registro-dayadog](Registro.png)
-![datadog-cuenta](Cuenta.png)
 
 3. luego llenas tus datos personales.
+![datadog-cuenta](cuenta.png)
 4. Te pidiran que instales el agente de datadog asi:
 ![agente.datadog](Servidor.png)
 lo cual utilizas tu API KEY y utilizas el comando en la maquina en la que deseas instalar el agente datadog.
-5. Una vez configurado el agente de datadog en la maquina damos click en infraestructura y despues en  mapa de anfitrion nos debe dejar observar el host asi:
+6. Una vez configurado el agente de datadog en la maquina damos click en infraestructura y despues en  mapa de anfitrion nos debe dejar observar el host asi:
 ![mapainfraestructura](Apikey.jpg)
 ![Llave de key](select.jpg)
-6. luego vamos al apartado de dashboards y damos click en new dashboard y creamos.
+7. luego vamos al apartado de dashboards y damos click en new dashboard y creamos.
 ![creacion.dashboard](dashboard.jpg)
-7. Una vez creado el dashboard damos click en add widgets or Powerpacks.
+8. Una vez creado el dashboard damos click en add widgets or Powerpacks.
 ![agregarmetricas](graficos.jpg)
-8. Nos mostrara la siguiente ventana donde podemos escoger el tipo de grafico deseado.
+9. Nos mostrara la siguiente ventana donde podemos escoger el tipo de grafico deseado.
 ![graficos](intalaciones.jpg)
-9. Una vez se escoja el grafico se procede a configurar las metricas que se quieren visualizar y se dan click en save.
+10. Una vez se escoja el grafico se procede a configurar las metricas que se quieren visualizar y se dan click en save.
 ![configuracion](type.jpg)
-10. luego podemos observar el grafico ya creado en nuestro dashboard.
+11. luego podemos observar el grafico ya creado en nuestro dashboard.
 ![grafico1](grafico1.jpg)  
 Y asi podemos seguir creando los graficos deseados para nuestro dashboard.
 # Contacto
