@@ -166,36 +166,41 @@ Para usar el balanceador de cargas con HAProxy y tres máquinas de Centos9, sigu
 
 1. Crear la cuenta en datadog dando click en prueba gratuita.
    
-![datadog-cuenta](cuenta.png)
+ ![Datos-Personales-datadog](Registro.png)  
 
+2.luego llenas tus datos personales.
 
-
-
-3. Visulaizacion de la cuenta creada
-   
-![Cuenta-datadog](Registro.png)
-
-3. luego llenas tus datos personales.
 ![Registro-datadog](datos.jpg)
+
+3. Visualizacion de la cuenta creada
+   
 ![datadog-cuenta](cuenta.png)
 
 4. Te pidiran que instales el agente de datadog asi:
    
-![agente.datadog](Servidor.png)
+![Instalacion-de-datadog](Apikey.jpg)   
 
-lo cual utilizas tu API KEY y utilizas el comando en la maquina en la que deseas instalar el agente datadog.
-6. Una vez configurado el agente de datadog en la maquina damos click en infraestructura y despues en  mapa de anfitrion nos debe dejar observar el host asi:
-![mapainfraestructura](Apikey.jpg)
+
+
+5. lo cual utilizaras tu API KEY dandole click y utilizas el comando en la maquina en la que deseas instalar el agente datadog:
+   
 ![Llave de key](select.jpg)
-7. luego vamos al apartado de dashboards y damos click en new dashboard y creamos.
+
+6. luego vamos al apartado de dashboards y damos click en new dashboard y creamos.
+   
 ![creacion.dashboard](dashboard.jpg)
-8. Una vez creado el dashboard damos click en add widgets or Powerpacks.
+
+7. Una vez creado el dashboard damos click en add widgets or Powerpacks.
+   
 ![agregarmetricas](graficos.jpg)
-9. Nos mostrara la siguiente ventana donde podemos escoger el tipo de grafico deseado.
+
+8. Nos mostrara la siguiente ventana donde podemos escoger el tipo de grafico deseado.
+    
 ![graficos](intalaciones.jpg)
-10. Una vez se escoja el grafico se procede a configurar las metricas que se quieren visualizar y se dan click en save.
+
+12. Una vez se escoja el grafico se procede a configurar las metricas que se quieren visualizar y se dan click en save.
 ![configuracion](type.jpg)
-11. luego podemos observar el grafico ya creado en nuestro dashboard.
+13. luego podemos observar el grafico ya creado en nuestro dashboard.
 ![grafico1](grafico1.jpg)  
 Y asi podemos seguir creando los graficos deseados para nuestro dashboard.
 # Contacto
