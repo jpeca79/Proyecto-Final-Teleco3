@@ -64,12 +64,13 @@ Con respecto al firewall (firewalld), puedes verificar su estado ejecutando serv
 * Servidor  instalado: haproxy y datadog-agent  
 
 -Para configurar HAProxy en tu sistema, sigue estos pasos:
-	1.Instala los compiladores y dependencias necesarias utilizando el siguiente comando: 'yum install gcc pcre-devel tar make -y'.
-	2.Descarga el paquete de HAProxy utilizando wget. Puedes hacerlo con el siguiente comando: 'wget https://www.haproxy.org/download/2.8/src/haproxy-2.8.3.tar.gz'.
-	3.Descomprime el archivo descargado usando el siguiente comando: 'tar -xzf haproxy-2.8.3.tar.gz'.
-	4.Ingresa al directorio descomprimido de HAProxy: 'cd haproxy-2.8.3'.
-	5.Compila HAProxy para tu sistema. Asegúrate de usar el comando correcto: 'make TARGET=linux-glibc'.
-	6.Instala HAProxy en tu sistema: 'make install'.
+
+1.Instala los compiladores y dependencias necesarias utilizando el siguiente comando: 'yum install gcc pcre-devel tar make -y'.
+2.Descarga el paquete de HAProxy utilizando wget. Puedes hacerlo con el siguiente comando: 'wget https://www.haproxy.org/download/2.8/src/haproxy-2.8.3.tar.gz'.
+3.Descomprime el archivo descargado usando el siguiente comando: 'tar -xzf haproxy-2.8.3.tar.gz'.
+4.Ingresa al directorio descomprimido de HAProxy: 'cd haproxy-2.8.3'.
+5.Compila HAProxy para tu sistema. Asegúrate de usar el comando correcto: 'make TARGET=linux-glibc'.
+6.Instala HAProxy en tu sistema: 'make install'.	
 	7.Finalmente, inicia el servicio de HAProxy: 'sudo systemctl start haproxy'.
 Con estos pasos, habrás instalado y configurado HAProxy en tu sistema CentOS. Asegúrate de haber ejecutado los comandos con permisos de superusuario o con el uso del comando sudo cuando sea necesario.
 
