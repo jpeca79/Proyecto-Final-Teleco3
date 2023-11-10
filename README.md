@@ -165,12 +165,24 @@ Para usar el balanceador de cargas con HAProxy y tres máquinas de Centos9, sigu
 # Configuración de Datadog
 
 1. Crear la cuenta en datadog dando click en prueba gratuita.
-![Registro-dayadog](Registro.png)
+   
+![datadog-cuenta](cuenta.png)
+
+
+
+
+3. Visulaizacion de la cuenta creada
+   
+![Cuenta-datadog](Registro.png)
 
 3. luego llenas tus datos personales.
+![Registro-datadog](datos.jpg)
 ![datadog-cuenta](cuenta.png)
+
 4. Te pidiran que instales el agente de datadog asi:
+   
 ![agente.datadog](Servidor.png)
+
 lo cual utilizas tu API KEY y utilizas el comando en la maquina en la que deseas instalar el agente datadog.
 6. Una vez configurado el agente de datadog en la maquina damos click en infraestructura y despues en  mapa de anfitrion nos debe dejar observar el host asi:
 ![mapainfraestructura](Apikey.jpg)
