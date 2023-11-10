@@ -148,7 +148,8 @@ Se debe instalar el servicio de apache2 con el siguiente comando: `apt install a
 5. Reiniciar HAProxy para aplicar los cambios, para esto se utiliza este codigo `service haproxy restart`.
 
 6. Se accede a la ip de la máquina frontend por medio de un buscador que en nuestro caso es google.
-    se accede a la ip de la máquina frontend
+
+![Haproxy](Haproxy.jpg)    
 
 # Uso
 Para usar el balanceador de cargas con HAProxy y tres máquinas de Centos9, sigue los siguientes pasos:
