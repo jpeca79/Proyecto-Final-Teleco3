@@ -1,5 +1,5 @@
 # Balanceador de carga con haproxy y Datadog
-![balanceador](balanceador.png)
+
 
 ## Descripción.
 Este proyecto proporciona una guía detallada sobre la configuración de un balanceador de cargas utilizando HAProxy junto con tres máquinas CentOS. Además, se integra Datadog como una interfaz de monitoreo para evaluar el rendimiento de una de las máquinas, en particular, el servidor HAProxy.
@@ -44,13 +44,13 @@ Se debe ejecutar el comando `Vagrant init` para crear el archivo y se configura 
  
 Una vez que hayas configurado el archivo Vagrantfile, procede ejecutando el comando vagrant up para crear las tres máquinas virtuales. Además, es importante verificar que SELinux esté desactivado. Puedes hacerlo ejecutando el comando 'sestatus'. Si SELinux está habilitado, deberás seguir estos pasos para desactivarlo:
 
-1.Abre un editor de texto como 'vim' o 'nano' y accede al archivo /etc/selinux/config.
+1.Abre un editor de texto como `vim` o `nano` y accede al archivo /etc/selinux/config.
 
-2.Dentro de este archivo, busca la línea que contiene 'SELINUX=enabled' si SELinux está habilitado.
+2.Dentro de este archivo, busca la línea que contiene `SELINUX=enabled` si SELinux está habilitado.
 
-3.Para desactivarlo, simplemente cambia 'enabled' por 'disabled', de la siguiente manera: 'SELINUX=disabled'.
+3.Para desactivarlo, simplemente cambia 'enabled' por `disabled`, de la siguiente manera: `SELINUX=disabled`.
 
-Con respecto al firewall (firewalld), puedes verificar su estado ejecutando service firewalld status. Si muestra que está activo, puedes desactivarlo ejecutando el siguiente comando: 'systemctl stop firewalld'.
+Con respecto al firewall (firewalld), puedes verificar su estado ejecutando service firewalld status. Si muestra que está activo, puedes desactivarlo ejecutando el siguiente comando: `systemctl stop firewalld`.
 
 
 
@@ -63,21 +63,21 @@ Con respecto al firewall (firewalld), puedes verificar su estado ejecutando serv
 * Sistema operativo: Centos 9
 * Servidor  instalado: haproxy y datadog-agent  
 
--Para configurar HAProxy en tu sistema, sigue estos pasos:
+**Para configurar HAProxy en tu sistema, sigue estos pasos**:
 
-1.Instala los compiladores y dependencias necesarias utilizando el siguiente comando: 'yum install gcc pcre-devel tar make -y'.
+- Instala los compiladores y dependencias necesarias utilizando el siguiente comando: `yum install gcc pcre-devel tar make -y`.
 
-2.Descarga el paquete de HAProxy utilizando wget. Puedes hacerlo con el siguiente comando: 'wget https://www.haproxy.org/download/2.8/src/haproxy-2.8.3.tar.gz'.
+- Descarga el paquete de HAProxy utilizando wget. Puedes hacerlo con el siguiente comando: `wget https://www.haproxy.org/download/2.8/src/haproxy-2.8.3.tar.gz`.
 
-3.Descomprime el archivo descargado usando el siguiente comando: 'tar -xzf haproxy-2.8.3.tar.gz'.
+- Descomprime el archivo descargado usando el siguiente comando: `tar -xzf haproxy-2.8.3.tar.gz`.
 
-4.Ingresa al directorio descomprimido de HAProxy: 'cd haproxy-2.8.3'.
+- Ingresa al directorio descomprimido de HAProxy: `cd haproxy-2.8.3`.
 
-5.Compila HAProxy para tu sistema. Asegúrate de usar el comando correcto: 'make TARGET=linux-glibc'.
+- Compila HAProxy para tu sistema. Asegúrate de usar el comando correcto: `make TARGET=linux-glibc`.
 
-6.Instala HAProxy en tu sistema: 'make install'.	
+- Instala HAProxy en tu sistema: `make install`.	
 
-7.Finalmente, inicia el servicio de HAProxy: 'sudo systemctl start haproxy'.
+- Finalmente, inicia el servicio de HAProxy: `sudo systemctl start haproxy`.
 
 Con estos pasos, habrás instalado y configurado HAProxy en tu sistema CentOS. Asegúrate de haber ejecutado los comandos con permisos de superusuario o con el uso del comando sudo cuando sea necesario.
 
@@ -102,19 +102,19 @@ Se debe instalar el servicio de apache2 con el siguiente comando: `apt install a
 1. Instalar los compiladores en la máquina servidor que servira.
 2. Instalar HAProxy en la máquina que actuará como balanceador de cargas en este caso es la maquina con el nombre de servidor.
 3.para que funcione el haproxy se debe crear ciertos directorios los cuales son los siguiente:
--'mkdir -p /etc/haproxy'
--'mkdir -p /var/lib/haproxy'
--'touch /var/lib/haproxy/stats'
--'ln-s /usr/local/sbin/haproxy/usr/sbin/haproxy'
--'cp ~/haproxy-2.8.3/examples/haproxy.init/etc/init.d/haproxy'
--'chmod 755 /etc/init.d/haproxy'
--systemctl daemon-reload'
--'chkconfig haproxy on'
+- `mkdir -p /etc/haproxy`
+- `mkdir -p /var/lib/haproxy`
+- `touch /var/lib/haproxy/stats`
+- `ln-s /usr/local/sbin/haproxy/usr/sbin/haproxy`
+- `cp ~/haproxy-2.8.3/examples/haproxy.init/etc/init.d/haproxy`
+- `chmod 755 /etc/init.d/haproxy`
+- `systemctl daemon-reload`
+- `chkconfig haproxy on`
 4. Crear un archivo de configuración para HAProxy en `/etc/haproxy/haproxy.cfg`.
 5. Configurar el archivo de configuración de HAProxy de la siguiente manera:
 
 ![haproxy.cfg](haproxy.cfg.jpg)
-4. Reiniciar HAProxy para aplicar los cambios, para esto se utiliza este codigo 'service haproxy restart'.
+4. Reiniciar HAProxy para aplicar los cambios, para esto se utiliza este codigo `service haproxy restart`.
 
 # Uso
 Para usar el balanceador de cargas con HAProxy y tres máquinas de Centos9, sigue los siguientes pasos:
@@ -148,4 +148,4 @@ lo cual utilizas tu API KEY y utilizas el comando en la maquina en la que deseas
 ![grafico1](grafico1.jpg)  
 Y asi podemos seguir creando los graficos deseados para nuestro dashboard.
 # Contacto
-Si tienes preguntas o sugerencias sobre este proyecto, por favor contáctame en mi correo electrónico: [jhon.lenn@uao.edu.co]:+1:.
+Si tienes preguntas o sugerencias sobre este proyecto, por favor contáctame en mi correo electrónico: [joshep.peralta@uao.edu.co]:.
