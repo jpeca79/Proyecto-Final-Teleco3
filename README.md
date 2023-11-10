@@ -190,18 +190,18 @@ Para usar el balanceador de cargas con HAProxy y tres máquinas de Centos9, sigu
    
 ![creacion.dashboard](dashboard.jpg)
 
-7. Una vez creado el dashboard damos click en add widgets or Powerpacks.
+7. Una vez creado el dashboard se personaliza a los que necesitemos.
    
+![configuracion](type.jpg)   
+
+
+8. Por ultimo seleccionamos el tipo de grafico deseado, para luego mostrarlo.
+    
 ![agregarmetricas](graficos.jpg)
 
-8. Nos mostrara la siguiente ventana donde podemos escoger el tipo de grafico deseado.
-    
-![graficos](intalaciones.jpg)
+Se guarda el grafico para asi tener todo en tu cuenta y si se quiere se puede modificar a tu gusto.
 
-12. Una vez se escoja el grafico se procede a configurar las metricas que se quieren visualizar y se dan click en save.
-![configuracion](type.jpg)
-13. luego podemos observar el grafico ya creado en nuestro dashboard.
-![grafico1](grafico1.jpg)  
-Y asi podemos seguir creando los graficos deseados para nuestro dashboard.
+
+
 # Contacto
 Si tienes preguntas o sugerencias sobre este proyecto, por favor contáctame en mi correo electrónico: [joshep.peralta@uao.edu.co]:.
