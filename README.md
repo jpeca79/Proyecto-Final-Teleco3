@@ -112,9 +112,40 @@ Se debe instalar el servicio de apache2 con el siguiente comando: `apt install a
 - `chkconfig haproxy on`
 4. Crear un archivo de configuración para HAProxy en `/etc/haproxy/haproxy.cfg`.
 5. Configurar el archivo de configuración de HAProxy de la siguiente manera:
+  
+		global
+        		log /dev/log local0
+        		log /dev/log local1 notice
+        		chroot /var/lib/haproxy
+        		stats timeout 30s
+        		user haproxy
+        		group haproxy
+        		daemon
 
-![haproxy.cfg](haproxy.cfg.jpg)
-4. Reiniciar HAProxy para aplicar los cambios, para esto se utiliza este codigo `service haproxy restart`.
+		defaults
+        		log global
+        		mode http
+        		option httplog
+        		option dontlognull
+        		timeout connect 5000
+        		timeout client 50000
+        		timeout server 50000
+
+		frontend http_front
+       			 bind *:80
+        		stats uri /haproxy? stats
+        		stats auth admin:admin
+        		default_backend http_back
+
+		backend http_back
+        		balance roundrobin
+   			server cliente 192.168.50.2:80 check
+        		server cliente2 192.168.50.4:80 check
+
+  
+4. Vamos al directorio `/etc/datadog-agent/conf.d/haproxy.d/conf.yaml`, Este codigo es el enlace de Datadog con Haproxy.
+
+5. Reiniciar HAProxy para aplicar los cambios, para esto se utiliza este codigo `service haproxy restart`.
 
 # Uso
 Para usar el balanceador de cargas con HAProxy y tres máquinas de Centos9, sigue los siguientes pasos:
