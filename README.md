@@ -149,7 +149,7 @@ Se debe instalar el servicio de apache2 con el siguiente comando: `apt install a
 
 6. Se accede a la ip de la máquina frontend por medio de un buscador que en nuestro caso es google.
 
-![Haproxy](servidorha.png)    
+![Haproxy](servidorha.jpg)    
 
 # Uso
 Para usar el balanceador de cargas con HAProxy y tres máquinas de Centos9, sigue los siguientes pasos:
@@ -157,7 +157,8 @@ Para usar el balanceador de cargas con HAProxy y tres máquinas de Centos9, sigu
 1. Accede al balanceador de cargas a través de su dirección IP en este caso es la maquina con el nombre de servidor "192.168.50.3".
 2. La solicitud será dirigida a uno de los dos servidores web de manera aleatoria asi:
 
-![backend2](backend2.jpg)
+![backend2](cliente 2.jpg)
+
 
 
 # Configuración de Datadog
