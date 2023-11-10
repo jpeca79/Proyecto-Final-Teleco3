@@ -149,7 +149,72 @@ Se debe instalar el servicio de apache2 con el siguiente comando: `apt install a
 
 6. Se accede a la ip de la máquina frontend por medio de un buscador que en nuestro caso es google.
 
-![Haproxy](servidorha.jpg)    
+![Haproxy](servidorha.jpg)  
+
+**Configuración de apache en clientes**
+
+Cliente 1:
+
+	Maquina cliente
+
+	/etc/httpd/conf/httpd.conf
+
+	Despues de instalar, se debe de habilitar un modulo que se llama mod status 
+	debajo de (DocumentRoot "/var/www/html") se pone lo siguiente 
+	###################################################################LoadModule status_module modules/mod_status.so
+	<Location /server-status>
+   	SetHandler server-status
+  	 Order deny,allow
+  	 Deny from all
+  	 Allow from all
+  	 Allow from 192.168.50.2  
+	</Location>
+	ExtendedStatus On
+
+ Cliente 2: 
+
+ 	Maquina cliente2
+
+	/etc/httpd/conf/httpd.conf
+
+	Despues de instalar, se debe de habilitar un modulo que se llama mod status 
+	debajo de (DocumentRoot "/var/www/html") se pone lo siguiente 
+	###################################################################LoadModule status_module modules/mod_status.so
+	<Location /server-status>
+   	SetHandler server-status
+   	Order deny,allow
+  	 Deny from all
+  	 Allow from all
+  	 Allow from 192.168.50.4  
+	</Location>
+	ExtendedStatus On
+ 
+**Integracion de la Maquinas clientes**
+
+Cliente 1: 
+
+	Maquina cliente
+	/etc/datadog-agent/conf.d/apache.d/conf.yaml 
+
+	debajo del instances:
+
+	agregar esta linea 
+
+	apache_status_url: http://192.168.50.2/server-status?auto
+
+ Cliente 2:
+
+ 	Maquina cliente2
+	/etc/datadog-agent/conf.d/apache.d/conf.yaml 
+
+	debajo del instances:
+
+	agregar esta linea 
+
+	apache_status_url: http://192.168.50.4/server-status?auto
+
+
+
 
 # Uso
 Para usar el balanceador de cargas con HAProxy y tres máquinas de Centos9, sigue los siguientes pasos:
